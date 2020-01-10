@@ -1,0 +1,37 @@
+{
+  "name": "search-for-qiita-with-thumb-up",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ext .ts --ignore-path .gitignore .",
+    "test": "npm run lint && npm run unit",
+    "unit": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abetomo/search-for-qiita-with-thumb-up.git"
+  },
+  "author": "abetomo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abetomo/search-for-qiita-with-thumb-up/issues"
+  },
+  "homepage": "https://github.com/abetomo/search-for-qiita-with-thumb-up#readme",
+  "devDependencies": {
+    "@types/node": "^13.1.5",
+    "@types/puppeteer": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "puppeteer": "^2.0.0"
+  }
+}
