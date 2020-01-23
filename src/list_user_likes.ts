@@ -1,11 +1,11 @@
 /* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
 
-// wip
-
-import * as puppeteer from 'puppeteer'
+import { launch } from 'puppeteer'
+import { writeFileSync } from 'fs'
 
 const userId = process.argv[2]
-const limit = Number(process.argv[3]) || 3
+const outputPath = process.argv[3]
+const limit = Number(process.argv[4]) || 3
 
 type Item = {
   link: string
@@ -14,7 +14,7 @@ type Item = {
 ;(async (): Promise<void> => {
   let links: Item[] = []
 
-  const browser = await puppeteer.launch({
+  const browser = await launch({
     headless: true,
     slowMo: 500
   })
@@ -57,7 +57,7 @@ type Item = {
     await page.waitFor(10000)
   }
 
-  console.log(JSON.stringify(links))
+  writeFileSync(outputPath, JSON.stringify(links), 'utf8')
 
   browser.close()
 })()
