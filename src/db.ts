@@ -1,5 +1,3 @@
-/* eslint '@typescript-eslint/camelcase': 0 */
-
 // wip
 
 import { Database } from 'nroonga'
@@ -31,32 +29,32 @@ export default class Db {
     this.db.commandSync('table_create', {
       name: this.tableName,
       flags: 'TABLE_HASH_KEY',
-      key_type: 'ShortText'
+      key_type: 'ShortText',
     })
 
     this.db.commandSync('column_create', {
       table: this.tableName,
       name: 'title',
       flags: 'COLUMN_SCALAR',
-      type: 'ShortText'
+      type: 'ShortText',
     })
     this.db.commandSync('column_create', {
       table: this.tableName,
       name: 'url',
       flags: 'COLUMN_SCALAR',
-      type: 'ShortText'
+      type: 'ShortText',
     })
     this.db.commandSync('column_create', {
       table: this.tableName,
       name: 'body',
       flags: 'COLUMN_SCALAR',
-      type: 'LongText'
+      type: 'LongText',
     })
     this.db.commandSync('column_create', {
       table: this.tableName,
       name: 'updated_at',
       flags: 'COLUMN_SCALAR',
-      type: 'Time'
+      type: 'Time',
     })
 
     this.db.commandSync('table_create', {
@@ -64,21 +62,21 @@ export default class Db {
       flags: 'TABLE_PAT_KEY|KEY_NORMALIZE',
       key_type: 'ShortText',
       normalizer: 'NormalizerAuto',
-      default_tokenizer: 'TokenBigramSplitSymbolAlpha'
+      default_tokenizer: 'TokenBigramSplitSymbolAlpha',
     })
     this.db.commandSync('column_create', {
       table: 'Terms',
       name: 'entry_title',
       flags: 'COLUMN_INDEX|WITH_POSITION',
       type: this.tableName,
-      source: 'title'
+      source: 'title',
     })
     this.db.commandSync('column_create', {
       table: 'Terms',
       name: 'entry_body',
       flags: 'COLUMN_INDEX|WITH_POSITION',
       type: this.tableName,
-      source: 'body'
+      source: 'body',
     })
   }
 
@@ -87,7 +85,7 @@ export default class Db {
     title,
     url,
     body,
-    updated_at
+    updated_at,
   }: {
     id: string
     title: string
@@ -102,8 +100,8 @@ export default class Db {
         updated_at: new Date(updated_at).getTime() * 1000,
         title,
         url,
-        body
-      })
+        body,
+      }),
     })
   }
 
@@ -112,7 +110,7 @@ export default class Db {
       table: this.tableName,
       match_columns: 'title,body',
       query: query,
-      limit: 100 // TODO: More than 100 cases
+      limit: 100, // TODO: More than 100 cases
     })
   }
 }

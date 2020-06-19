@@ -16,7 +16,7 @@ type Item = {
 
   const browser = await launch({
     headless: true,
-    slowMo: 500
+    slowMo: 500,
   })
 
   const page = await browser.newPage()
@@ -31,7 +31,7 @@ type Item = {
       const links = elements.map((a) => {
         return {
           link: a.getAttribute('href'),
-          title: (a as HTMLElement).innerText
+          title: (a as HTMLElement).innerText,
         }
       })
       const next = ((): boolean => {

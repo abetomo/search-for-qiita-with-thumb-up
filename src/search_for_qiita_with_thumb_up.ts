@@ -50,7 +50,7 @@ const select = (query: string): void => {
     const json = JSON.stringify(
       {
         title: row[3],
-        url: row[5]
+        url: row[5],
       },
       null,
       '  '
