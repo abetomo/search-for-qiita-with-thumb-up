@@ -20,13 +20,13 @@ type Item = {
   })
 
   const page = await browser.newPage()
-  await page.goto(`https://qiita.com/${userId}/like`)
+  await page.goto(`https://qiita.com/${userId}/lgtms`)
 
   for (let i = 0; i < limit; i++) {
     console.log(`page: ${i + 1}`)
     const data = await page.evaluate(() => {
       const elements = Array.from(
-        document.getElementsByClassName('u-link-no-underline')
+        document.querySelectorAll('a[class^="LgtmArticleList__ArticleTitle"]')
       )
       const links = elements.map((a) => {
         return {
@@ -36,9 +36,7 @@ type Item = {
       })
       const next = ((): boolean => {
         try {
-          const nextLink = document.getElementsByClassName(
-            'js-next-page-link'
-          )[0]
+          const nextLink = document.getElementsByClassName('st-Pager_link')[0]
           if (nextLink == null) {
             return false
           }
