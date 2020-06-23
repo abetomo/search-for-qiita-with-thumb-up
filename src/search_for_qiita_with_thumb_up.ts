@@ -18,10 +18,10 @@ import Db from './db'
 const db = new Db()
 db.init()
 
-const getLikeData = (): any[] => {
+const getLikeData = (username: string): any[] => {
   const likeDataPath = path.join(tmpdir(), 'list_user_likes.json')
   const command = path.join(__dirname, 'list_user_likes.ts')
-  execSync(`ts-node ${command} abetomo ${likeDataPath}`)
+  execSync(`ts-node ${command} ${username} ${likeDataPath}`)
 
   const likeData = require(likeDataPath)
   unlinkSync(likeDataPath)
@@ -29,16 +29,18 @@ const getLikeData = (): any[] => {
 }
 
 const usage = (): void => {
-  console.log(`${path.basename(process.argv[1])} select|update [query]`)
+  console.log(
+    `${path.basename(process.argv[1])} select QUERY | update USERNAME`
+  )
 }
 
-const update = async (): Promise<void> => {
-  const likeData = getLikeData()
+const update = async (username: string): Promise<void> => {
+  const likeData = getLikeData(username)
   for (const data of likeData) {
     const itemId = data.link.split('/').pop()
 
     const item = await qiita.Resources.Item.get_item(itemId)
-    console.log(item)
+    console.log(item.title)
     db.load(item)
 
     await new Promise((resolve) => setTimeout(resolve, WAIT_MILLISECOND))
@@ -60,16 +62,15 @@ const select = (query: string): void => {
 }
 
 const action = process.argv[2]
-const query = process.argv[3]
 
 switch (action) {
   case 'update':
-    update().then(() => {
+    update(process.argv[3]).then(() => {
       process.exit(0)
     })
     break
   case 'select':
-    select(query)
+    select(process.argv[3])
     process.exit(0)
     break
   default:
