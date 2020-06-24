@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2018", "dom"],
+    "moduleResolution": "node",
     "outDir": "./dist",
     "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "target": "es2018"
   },
   "include": [
     "src/**/*"
