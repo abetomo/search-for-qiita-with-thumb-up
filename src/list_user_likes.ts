@@ -25,15 +25,18 @@ type Item = {
   for (let i = 0; i < limit; i++) {
     console.log(`page: ${i + 1}`)
     const data = await page.evaluate(() => {
-      const elements = Array.from(
-        document.querySelectorAll('a[class^="LgtmArticleList__ArticleTitle"]')
-      )
-      const links = elements.map((a) => {
-        return {
-          link: a.getAttribute('href'),
-          title: (a as HTMLElement).innerText,
-        }
-      })
+      const elements = Array.from(document.getElementsByTagName('a'))
+      const links = elements
+        .filter((a) => {
+          const href = a.getAttribute('href')
+          return href != null && href.match(/\/items\//)
+        })
+        .map((a) => {
+          return {
+            link: a.getAttribute('href'),
+            title: (a as HTMLElement).innerText,
+          }
+        })
       const next = ((): boolean => {
         try {
           const nextLink = document.getElementsByClassName('st-Pager_link')[0]
