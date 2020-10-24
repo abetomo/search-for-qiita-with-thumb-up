@@ -55,7 +55,7 @@ type Item = {
     if (!data.next) {
       break
     }
-    await page.waitFor(10000)
+    await page.waitForTimeout(10000)
   }
 
   writeFileSync(outputPath, JSON.stringify(links), 'utf8')
