@@ -11,5 +11,5 @@ QIITA_TOKEN=api-token npx ts-node src/search_for_qiita_with_thumb_up.ts update U
 ## Search
 
 ```
-QIITA_TOKEN=api-token npx ts-node src/search_for_qiita_with_thumb_up.ts select QUERY
+npx ts-node src/search_for_qiita_with_thumb_up.ts select QUERY
 ```
