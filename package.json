@@ -1,6 +1,6 @@
 {
   "name": "search-for-qiita-with-thumb-up",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/abetomo/search-for-qiita-with-thumb-up.git"
   },
   "author": "abetomo",
-  "license": "MIT",
+  "license": "LGPL-2.1",
   "bugs": {
     "url": "https://github.com/abetomo/search-for-qiita-with-thumb-up/issues"
   },
