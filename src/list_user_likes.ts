@@ -39,7 +39,7 @@ type Item = {
         })
       const next = ((): boolean => {
         try {
-          const nextLink = document.getElementsByClassName('st-Pager_link')[0]
+          const nextLink = document.getElementsByClassName('fa-angle-right')[0]
           if (nextLink == null) {
             return false
           }
