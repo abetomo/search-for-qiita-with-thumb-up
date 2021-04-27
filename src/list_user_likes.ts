@@ -12,53 +12,42 @@ type Item = {
   title: string
 }
 ;(async (): Promise<void> => {
-  let links: Item[] = []
-
-  const browser = await launch({
-    headless: true,
-    slowMo: 500,
-  })
+  const browser = await launch({ headless: true })
 
   const page = await browser.newPage()
   await page.goto(`https://qiita.com/${userId}/lgtms`)
 
+  const links: Item[] = []
   for (let i = 0; i < limit; i++) {
     console.log(`page: ${i + 1}`)
-    const data = await page.evaluate(() => {
-      const elements = Array.from(document.getElementsByTagName('a'))
-      const links = elements
-        .filter((a) => {
-          const href = a.getAttribute('href')
-          return href != null && href.match(/\/items\//)
-        })
-        .map((a) => {
-          return {
-            link: a.getAttribute('href'),
-            title: (a as HTMLElement).innerText,
-          }
-        })
-      const next = ((): boolean => {
-        try {
-          const nextLink = document.getElementsByClassName('fa-angle-right')[0]
-          if (nextLink == null) {
-            return false
-          }
-          ;(nextLink as HTMLElement).click()
-          return true
-        } catch (e) {}
-        return false
-      })()
-      return { links, next }
-    })
-    links = links.concat(data.links as Item[])
+    const elements = await page.$$('article a')
+    for (const elem of elements) {
+      const href = await elem.getProperty('href')
+      if (href == null) {
+        continue
+      }
+      const text = await elem.getProperty('textContent')
+      if (text == null) {
+        continue
+      }
 
-    if (!data.next) {
+      const link: string = await href.jsonValue()
+      if (!link.match(/\/items\//)) {
+        continue
+      }
+      const title: string = await text.jsonValue()
+
+      links.push({ link, title })
+    }
+    const nextLink = await page.$('.fa-angle-right')
+    if (nextLink == null) {
       break
     }
+    nextLink.click()
     await page.waitForTimeout(10000)
   }
 
   writeFileSync(outputPath, JSON.stringify(links), 'utf8')
 
-  browser.close()
+  await browser.close()
 })()
