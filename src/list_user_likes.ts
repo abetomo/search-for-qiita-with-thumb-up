@@ -16,6 +16,7 @@ type Item = {
 
   const page = await browser.newPage()
   await page.goto(`https://qiita.com/${userId}/lgtms`)
+  await page.waitForTimeout(3000)
 
   const links: Item[] = []
   for (let i = 0; i < limit; i++) {
