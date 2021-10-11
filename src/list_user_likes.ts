@@ -19,6 +19,7 @@ type Item = {
   await page.waitForTimeout(3000)
 
   const links: Item[] = []
+  const myPostRegExp = new RegExp(`${userId}/items/`)
   for (let i = 0; i < limit; i++) {
     console.log(`page: ${i + 1}`)
     const elements = await page.$$('article a')
@@ -34,6 +35,9 @@ type Item = {
 
       const link: string = await href.jsonValue()
       if (!link.match(/\/items\//)) {
+        continue
+      }
+      if (myPostRegExp.test(link)) {
         continue
       }
       const title: string = await text.jsonValue()
