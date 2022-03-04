@@ -1,6 +1,6 @@
 /* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
 
-import { launch } from 'puppeteer'
+import puppeteer from 'puppeteer'
 import { writeFileSync } from 'fs'
 
 const userId = process.argv[2]
@@ -12,7 +12,7 @@ type Item = {
   title: string
 }
 ;(async (): Promise<void> => {
-  const browser = await launch({ headless: true })
+  const browser = await puppeteer.launch({ headless: true })
 
   const page = await browser.newPage()
   await page.goto(`https://qiita.com/${userId}/lgtms`)
