@@ -32,6 +32,10 @@ type Item = {
       if (text == null) {
         continue
       }
+      const title: string = await text.jsonValue()
+      if (title === '') {
+        continue
+      }
 
       const link: string = await href.jsonValue()
       if (!link.match(/\/items\//)) {
@@ -40,7 +44,6 @@ type Item = {
       if (myPostRegExp.test(link)) {
         continue
       }
-      const title: string = await text.jsonValue()
 
       links.push({ link, title })
     }
