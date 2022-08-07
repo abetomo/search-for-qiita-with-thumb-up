@@ -1,7 +1,7 @@
 /* eslint '@typescript-eslint/no-var-requires': 0 */
 
 import * as path from 'path'
-import { execSync } from 'child_process'
+import { execFileSync } from 'child_process'
 import { tmpdir } from 'os'
 import { unlinkSync } from 'fs'
 
@@ -21,7 +21,9 @@ db.init()
 const getLikeData = (username: string): any[] => {
   const likeDataPath = path.join(tmpdir(), 'list_user_likes.json')
   const command = path.join(__dirname, 'list_user_likes.ts')
-  execSync(`ts-node ${command} ${username} ${likeDataPath}`)
+  const cmd = 'ts-node'
+  const args = [command, username, likeDataPath]
+  execFileSync(cmd, args)
 
   const likeData = require(likeDataPath)
   unlinkSync(likeDataPath)
