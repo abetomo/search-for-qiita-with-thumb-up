@@ -47,7 +47,7 @@ type Item = {
 
       links.push({ link, title })
     }
-    const nextLink = await page.$('.fa-angle-right')
+    const nextLink = await page.$('button[aria-label="Next Page"]')
     if (nextLink == null) {
       break
     }
