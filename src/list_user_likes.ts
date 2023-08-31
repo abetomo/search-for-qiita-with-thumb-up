@@ -32,12 +32,12 @@ type Item = {
       if (text == null) {
         continue
       }
-      const title: string = await text.jsonValue() ?? ''
+      const title: string = (await text.jsonValue()) ?? ''
       if (title === '') {
         continue
       }
 
-      const link: string = await href.jsonValue() as string
+      const link: string = (await href.jsonValue()) as string
       if (!link.match(/\/items\//)) {
         continue
       }
