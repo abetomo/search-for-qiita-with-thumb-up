@@ -1,4 +1,5 @@
 // wip
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Database } from 'nroonga'
 

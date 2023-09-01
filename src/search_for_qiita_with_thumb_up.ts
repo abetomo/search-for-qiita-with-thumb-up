@@ -1,4 +1,5 @@
 /* eslint '@typescript-eslint/no-var-requires': 0 */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as path from 'path'
 import { execFileSync } from 'child_process'
@@ -32,7 +33,7 @@ const getLikeData = (username: string): any[] => {
 
 const usage = (): void => {
   console.log(
-    `${path.basename(process.argv[1])} select QUERY | update USERNAME`
+    `${path.basename(process.argv[1])} select QUERY | update USERNAME`,
   )
 }
 
@@ -57,7 +58,7 @@ const select = (query: string): void => {
         url: row[5],
       },
       null,
-      '  '
+      '  ',
     )
     console.log(json)
   }
