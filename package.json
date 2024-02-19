@@ -23,7 +23,7 @@
     "bluebird": "^3.7.2",
     "isomorphic-fetch": "^3.0.0",
     "nroonga": "^0.4.3",
-    "puppeteer": "^21.1.1",
+    "puppeteer": "^22.1.0",
     "qiita-js": "^0.4.3"
   },
   "devDependencies": {
